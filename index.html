@@ -63,7 +63,7 @@
  * ✅ここにGASのWebアプリURL（/exec）を入れる
  * 例：https://script.google.com/macros/s/AKfycbxxxxxxx/exec
  */
-const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwtsh0c-zNwpa2hnzGKJyEnzweV9MKxalndWds2e7gJtMri-yrnc9NbkRO-OL7gabHd/exec';
+const GAS_API_BASE = "https://script.google.com/macros/s/AKfycbwtsh0c-zNwpa2hnzGKJyEnzweV9MKxalndWds2e7gJtMri-yrnc9NbkRO-OL7gabHd/exec?api=reports&limit=500";
 
 let map, layer;
 let markers = [];
@@ -130,10 +130,10 @@ function applyFilters(rows){
 /**
  * JSONPでGAS APIを読む
  */
-function fetchReportsJsonp(limit=500){
+function fetchReportsJsonp(){
   return new Promise((resolve, reject)=>{
     const cbName = 'cb_' + Math.random().toString(36).slice(2);
-    const url = `${GAS_WEBAPP_URL}?api=reports&limit=${encodeURIComponent(limit)}&callback=${cbName}`;
+    const url = `${GAS_API_BASE}&callback=${cbName}`;
 
     const timer = setTimeout(()=>{
       cleanup();
